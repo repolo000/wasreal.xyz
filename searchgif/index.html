@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>wasreal.xyz random gif</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div id="gif-wrap"></div>
+    <input type="text" id="tags" value="wasreal" placeholder="검색어">
+    <!-- button to submit and search -->
+    <button id="search-gif" onclick="search_tag()">짤 검색</button>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+
+    <script>
+        function search_tag() {
+            // Initiate gifLoop for set interval
+            var refresh;
+            var tags = document.getElementById("tags").value;
+            // Duration count in seconds
+            const duration = 1000 * 10;
+            // Giphy API defaults
+            const giphy = {
+                baseURL: "https://api.giphy.com/v1/gifs/",
+                apiKey: "0UTRbFtkMxAplrohufYco5IY74U8hOes",
+                tag: tags,
+                type: "random",
+                rating: "pg-13"
+            };
+            // Target gif-wrap container
+            const $gif_wrap = $("#gif-wrap");
+            // Giphy API URL
+            let giphyURL = encodeURI(
+                giphy.baseURL +
+                giphy.type +
+                "?api_key=" +
+                giphy.apiKey +
+                "&tag=" +
+                giphy.tag +
+                "&rating=" +
+                giphy.rating
+            );
+
+            // Call Giphy API and render data
+            var newGif = () => $.getJSON(giphyURL, json => renderGif(json.data));
+
+            // Display Gif in gif wrap container
+            var renderGif = _giphy => {
+                console.log(_giphy);
+                // Set gif as bg image
+                $gif_wrap.css({
+                    "background-image": 'url("' + _giphy.images.original.url + '")'
+                });
+
+                // Start duration countdown
+                // refreshRate();
+            };
+
+            // Call for new gif after duration
+            // var refreshRate = () => {
+            // 	// Reset set intervals
+            // 	clearInterval(refresh);
+            // 	refresh = setInterval(function() {
+            // 		// Call Giphy API for new gif
+            // 		newGif();
+            // 	}, duration);
+            // };
+
+            // Call Giphy API for new gif
+            newGif();
+
+
+            const newGifButton = $('#new-gif');
+
+            newGifButton.click(newGif)
+        };
+    </script>
+    <!-- <iframe hidden src="https://www.youtube.com/embed/fNU-XAZjhzA?autoplay=1&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe> -->
+
+</body>
+
+</html>
