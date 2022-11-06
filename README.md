@@ -10,4 +10,6 @@ wasreal.xyz 는 wasreal이 운영하는 링크모음 및 정적 웹사이트 배
 - http://wasreal.xyz/rangif
 + http://wasreal.xyz/searchgif
 - http://wasreal.xyz/webhook
--이렇게 있고 시간이 지날수록 
+
+이렇게 있고 시간이 지날수록 
+추가될 예정입니다
